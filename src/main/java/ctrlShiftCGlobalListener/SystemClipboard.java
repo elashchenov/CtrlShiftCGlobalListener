@@ -7,16 +7,20 @@ import java.io.IOException;
 
 public class SystemClipboard {
 
-    public static void copySelectedText() throws AWTException {
-        Robot robot = new Robot();
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_C);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_C);
+    static void copySelectedText() {
+        try {
+            Robot robot = new Robot();
+            robot.setAutoDelay(30);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_C);
+            robot.keyRelease(KeyEvent.VK_C);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String getText() throws IOException, UnsupportedFlavorException {
+    static String getText() throws IOException, UnsupportedFlavorException {
         Clipboard systemClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
         if (systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {

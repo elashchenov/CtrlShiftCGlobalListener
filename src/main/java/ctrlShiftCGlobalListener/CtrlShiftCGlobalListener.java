@@ -14,7 +14,7 @@ public class CtrlShiftCGlobalListener implements NativeKeyListener {
     private boolean cPressed = false;
     private boolean hotKeyCaught = false;
 
-    public static void start() throws NativeHookException {
+    static void start() throws NativeHookException {
         GlobalScreen.addNativeKeyListener(new CtrlShiftCGlobalListener());
         GlobalScreen.registerNativeHook();
     }
@@ -23,7 +23,7 @@ public class CtrlShiftCGlobalListener implements NativeKeyListener {
         GlobalScreen.unregisterNativeHook();
     }
 
-    public static void setLogsLevel(Level logsLevel) {
+    static void setLogsLevel(Level logsLevel) {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(logsLevel);
         logger.setUseParentHandlers(false);
@@ -43,9 +43,7 @@ public class CtrlShiftCGlobalListener implements NativeKeyListener {
         if (!ctrlPressed && !shiftPressed && !cPressed && hotKeyCaught) {
             hotKeyCaught = false;
             try {
-                Thread.sleep(80);//need to remove
                 SystemClipboard.copySelectedText();
-                Thread.sleep(80);//need to remove
                 System.out.println(SystemClipboard.getText());
             } catch (Exception e) {
                 e.printStackTrace();
