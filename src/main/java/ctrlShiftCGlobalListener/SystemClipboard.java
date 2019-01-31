@@ -23,6 +23,12 @@ public class SystemClipboard {
     static String getText() throws IOException, UnsupportedFlavorException {
         Clipboard systemClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         if (systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
             Object text = systemClipboard.getData(DataFlavor.stringFlavor);
             return (String) text;
